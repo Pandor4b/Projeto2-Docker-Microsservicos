@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Banco de dados PostgreSQL
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: desafio2-postgres-db
+    environment:
+      POSTGRES_DB: rpg_db
+      POSTGRES_USER: mestre
+      POSTGRES_PASSWORD: dado20
+    ports:
+      - "5432:5432"
+    volumes:
+      - dados_postgres:/var/lib/postgresql/data  
+      - ./database/rpg_db.sql:/docker-entrypoint-initdb.d/rpg_db.sql  
+    networks:
+      - desafio2-network
+    restart: unless-stopped
+
+  # Aplicação Python
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: desafio2-rpg-app
+    depends_on:
+      - postgres-db
+    networks:
+      - desafio2-network
+    command: python app.py
+
+# Volume para persistir dados
+volumes:
+  dados_postgres:
+    name: desafio2-dados-rpg
+
+# Rede customizada
+networks:
+  desafio2-network:
+    driver: bridge
+    name: desafio2-network
