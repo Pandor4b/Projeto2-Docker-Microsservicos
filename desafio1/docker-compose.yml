@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Servidor Flask
+  flask-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: desafio1-flask-server
+    ports:
+      - "8080:8080"  
+    networks:
+      - desafio1-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # Cliente HTTP
+  http-client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: desafio1-http-client
+    depends_on:
+      flask-server:
+        condition: service_started
+    networks:
+      - desafio1-network
+    restart: unless-stopped
+
+networks:
+  desafio1-network:
+    driver: bridge
+    name: desafio1-network
