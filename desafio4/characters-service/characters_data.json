@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "name": "Wilson",
+        "title": "The Gentleman Scientist",
+        "health": 150,
+        "hunger": 150,
+        "sanity": 200,
+        "special_ability": "Grows a magnificent beard that provides warmth in winter",
+        "survival_odds": "Grim",
+        "joined_at": "2025-06-15"
+    },
+    {
+        "id": 2,
+        "name": "Willow",
+        "title": "The Firestarter",
+        "health": 150,
+        "hunger": 150,
+        "sanity": 120,
+        "special_ability": "Immune to fire damage and gains sanity near flames",
+        "survival_odds": "Grim",
+        "joined_at": "2025-11-01"
+    },
+    {
+        "id": 3,
+        "name": "Wormwood",
+        "title": "The Lonesome",
+        "health": 150,
+        "hunger": 150,
+        "sanity": 200,
+        "special_ability": "Has a Green Thumb, gets saddened when plants are killed",
+        "survival_odds": "Grim",
+        "joined_at": "2025-07-05"
+    },
+    {
+        "id": 4,
+        "name": "WX-78",
+        "title": "The Soulless Automaton",
+        "health": 100,
+        "hunger": 100,
+        "sanity": 100,
+        "special_ability": "Can eat spoiled food and gets powered up by lightning",
+        "survival_odds": "Grim",
+        "joined_at": "2025-05-12"
+    },
+    {
+        "id": 5,
+        "name": "Wigfrid",
+        "title": "The Performance Artist",
+        "health": 200,
+        "hunger": 120,
+        "sanity": 120,
+        "special_ability": "Gains Power from attacking, only eats Meat",
+        "survival_odds": "Slim",
+        "joined_at": "2025-02-18"
+    },
+    {
+        "id": 6,
+        "name": "Warly",
+        "title": "The Culinarian",
+        "health": 150,
+        "hunger": 250,
+        "sanity": 200,
+        "special_ability": "Has his own line of custom portable cookware, only eats gourmet food",
+        "survival_odds": "Grim",
+        "joined_at": "2025-02-17"
+    },
+    {
+        "id": 7,
+        "name": "Wes",
+        "title": "The Silent",
+        "health": 75,
+        "hunger": 75,
+        "sanity": 75,
+        "special_ability": "Can't talk, has trouble staying alive",
+        "survival_odds": "None",
+        "joined_at": "2025-10-18"
+    }
+]

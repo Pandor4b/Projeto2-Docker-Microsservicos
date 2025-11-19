@@ -1,0 +1,33 @@
+services:
+  # Microsserviço A: Characters Service
+  characters-service:
+    build:
+      context: ./characters-service
+      dockerfile: Dockerfile
+    container_name: desafio4-characters-service
+    ports:
+      - "5001:5001"
+    networks:
+      - desafio4-network
+    restart: unless-stopped
+
+  # Microsserviço B: Survival Stats Service
+  survival-stats-service:
+    build:
+      context: ./survival-stats-service
+      dockerfile: Dockerfile
+    container_name: desafio4-survival-stats-service
+    ports:
+      - "5002:5002"
+    environment:
+      - CHARACTERS_SERVICE_URL=http://characters-service:5001
+    depends_on:
+      - characters-service
+    networks:
+      - desafio4-network
+    restart: unless-stopped
+
+networks:
+  desafio4-network:
+    driver: bridge
+    name: desafio4-network
