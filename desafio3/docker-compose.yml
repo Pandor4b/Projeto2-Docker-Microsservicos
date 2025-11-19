@@ -1,0 +1,49 @@
+services:
+  # Battle API (Serviço Web)
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: desafio3-battle-api
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=pokemon_db
+      - DB_USER=trainer
+      - DB_PASSWORD=pokeball
+      - REDIS_HOST=cache
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - cache
+    networks:
+      - desafio3-network
+    restart: unless-stopped
+
+  # PostgreSQL (Database)
+  db:
+    image: postgres:15-alpine
+    container_name: desafio3-postgres
+    environment:
+      POSTGRES_DB: pokemon_db
+      POSTGRES_USER: trainer
+      POSTGRES_PASSWORD: pokeball
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - desafio3-network
+    restart: unless-stopped
+
+  # Redis (Cache)
+  cache:
+    image: redis:7-alpine
+    container_name: desafio3-redis
+    networks:
+      - desafio3-network
+    restart: unless-stopped
+
+networks:
+  desafio3-network:
+    driver: bridge
+    name: desafio3-network
