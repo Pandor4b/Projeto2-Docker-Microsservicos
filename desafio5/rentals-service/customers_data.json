@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "name": "Paulo Rosado",
+        "email": "paulo.rosado@vinyl.com",
+        "membership_tier": "Gold",
+        "active_rentals": 0,
+        "max_rentals": 5,
+        "rental_history_count": 47,
+        "favorite_genre": "Musical",
+        "joined_at": "2023-03-15"
+    },
+    {
+        "id": 2,
+        "name": "Sophia Gallindo",
+        "email": "sophia.gallindo@vinyl.com",
+        "membership_tier": "Silver",
+        "active_rentals": 0,
+        "max_rentals": 3,
+        "rental_history_count": 28,
+        "favorite_genre": "Indie",
+        "joined_at": "2023-07-22"
+    },
+    {
+        "id": 3,
+        "name": "Gabriel Melo",
+        "email": "gabriel.melo@vinyl.com",
+        "membership_tier": "Bronze",
+        "active_rentals": 0,
+        "max_rentals": 2,
+        "rental_history_count": 12,
+        "favorite_genre": "Rock Alternativo",
+        "joined_at": "2024-01-10"
+    },
+    {
+        "id": 4,
+        "name": "Vinicius de Andrade",
+        "email": "vinicius.andrae@vinyl.com",
+        "membership_tier": "Gold",
+        "active_rentals": 0,
+        "max_rentals": 5,
+        "rental_history_count": 63,
+        "favorite_genre": "Rock Alternativo",
+        "joined_at": "2022-11-05"
+    },
+    {
+        "id": 5,
+        "name": "Gustavo Mourato",
+        "email": "gustavo.mourato@vinyl.com",
+        "membership_tier": "Silver",
+        "active_rentals": 0,
+        "max_rentals": 3,
+        "rental_history_count": 19,
+        "favorite_genre": "Shoegaze",
+        "joined_at": "2024-05-18"
+    },
+    {
+        "id": 6,
+        "name": "Luan Kato",
+        "email": "luan.kato@vinyl.com",
+        "membership_tier": "Bronze",
+        "active_rentals": 0,
+        "max_rentals": 3,
+        "rental_history_count": 21,
+        "favorite_genre": "Rock Alternativo",
+        "joined_at": "2024-09-06"
+    }
+]

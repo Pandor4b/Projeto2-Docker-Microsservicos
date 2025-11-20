@@ -1,0 +1,30 @@
+services:
+  gateway:
+    build: ./gateway
+    container_name: desafio5-gateway
+    ports:
+      - "8080:8080"  
+    environment:
+      - RECORDS_SERVICE_URL=http://records-service:5001
+      - RENTALS_SERVICE_URL=http://rentals-service:5002
+    depends_on:
+      - records-service
+      - rentals-service
+    networks:
+      - desafio5-network
+
+  records-service:
+    build: ./records-service
+    container_name: desafio5-records
+    networks:
+      - desafio5-network
+
+  rentals-service:
+    build: ./rentals-service
+    container_name: desafio5-rentals
+    networks:
+      - desafio5-network
+
+networks:
+  desafio5-network:
+    driver: bridge

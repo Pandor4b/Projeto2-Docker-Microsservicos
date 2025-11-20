@@ -1,0 +1,191 @@
+[
+    {
+        "id": 1,
+        "title": "After Laughter",
+        "artist": "Paramore",
+        "genre": "Pop Rock",
+        "year": 2017,
+        "label": "Atlantic Recording Corp",
+        "condition": "Near Mint",
+        "daily_rental_price": 15.00,
+        "available_copies": 2,
+        "total_copies": 3,
+        "tracks": [
+            "Hard Times",
+            "Forgiveness",
+            "26",
+            "Pool",
+            "Grudges",
+            "Idle Worship"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "D>E>A>T>H>M>E>T>A>L",
+        "artist": "Panchiko",
+        "genre": "Shoegaze",
+        "year": 2000,
+        "label": "Panchiko",
+        "condition": "Excellent",
+        "daily_rental_price": 18.00,
+        "available_copies": 1,
+        "total_copies": 2,
+        "tracks": [
+            "D>E>A>T>H>M>E>T>A>L",
+            "Stabilisers For Big Boys",
+            "Laputa",
+            "CUT",
+            "Kicking Cars"
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Petals For Armor",
+        "artist": "Hayley Williams",
+        "genre": "Indie",
+        "year": 2020,
+        "label": "Atlantic Recording Corp",
+        "condition": "Near Mint",
+        "daily_rental_price": 20.00,
+        "available_copies": 3,
+        "total_copies": 4,
+        "tracks": [
+            "Simmer",
+            "Sudden Desire",
+            "Dead Horse",
+            "Roses/Lotus/Violet/Iris",
+            "Why We Ever",
+            "Sugar On The Rim"
+        ]
+    },
+    {
+        "id": 4,
+        "title": "One More Light",
+        "artist": "Linkin Park",
+        "genre": "Pop Rock",
+        "year": 2017,
+        "label": "Warner Records Inc.",
+        "condition": "Very Good",
+        "daily_rental_price": 16.00,
+        "available_copies": 2,
+        "total_copies": 2,
+        "tracks": [
+            "Talking to Myself",
+            "Heavy (feat. Kiiara)",
+            "Halfway Right",
+            "Sharp Edges"
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Meteora (Bonus Edition)",
+        "artist": "Linkin Park",
+        "genre": "Rock Alternativo",
+        "year": 2003,
+        "label": "Warner Records Inc.",
+        "condition": "Excellent",
+        "daily_rental_price": 17.00,
+        "available_copies": 1,
+        "total_copies": 1,
+        "tracks": [
+            "Don't Stay",
+            "Somewhere I Belong",
+            "Easier to Run",
+            "Numb"
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Electra Heart (Deluxe)",
+        "artist": "MARINA",
+        "genre": "Electropop",
+        "year": 2012,
+        "label": "679 Recordings Ltd.",
+        "condition": "Near Mint",
+        "daily_rental_price": 14.00,
+        "available_copies": 2,
+        "total_copies": 2,
+        "tracks": [
+            "Bubblegum Bitch",
+            "Primadonna",
+            "Teen Idle",
+            "How to Be a Heartbreaker"
+        ]
+    },
+    {
+        "id": 7,
+        "title": "The Rise and Fall of a Midwest Princess",
+        "artist": "Chappell Roan",
+        "genre": "Pop Alternativo",
+        "year": 2023,
+        "label": "Amusement Records",
+        "condition": "Very Good",
+        "daily_rental_price": 19.00,
+        "available_copies": 0,
+        "total_copies": 2,
+        "tracks": [
+            "Femininomenon",
+            "After Midnight",
+            "HOT TO GO!",
+            "Red Wine Supernova"
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Hamilton (Original Broadway Cast Recording)",
+        "artist": "Original Broadway Cast of Hamilton",
+        "genre": "Musical",
+        "year": 2015,
+        "label": "Atlantic Records",
+        "condition": "Excellent",
+        "daily_rental_price": 16.00,
+        "available_copies": 1,
+        "total_copies": 1,
+        "tracks": [
+            "My Shot",
+            "The Schuyler Sisters",
+            "Satisfied",
+            "The Room Where It Happens",
+            "Burn"
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Ego Death At Bachalorette Party",
+        "artist": "Hayley Williams",
+        "genre": "Indie",
+        "year": 2025,
+        "label": "Post Atlantic",
+        "condition": "Excellent",
+        "daily_rental_price": 17.00,
+        "available_copies": 2,
+        "total_copies": 3,
+        "tracks": [
+            "Ice In My OJ",
+            "Parachute",
+            "Showbiz",
+            "Ego Death At Bachalorette Party",
+            "True Beliver"
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Violeta",
+        "artist": "Terno Rei",
+        "genre": "Rock Alternativo",
+        "year": 2019,
+        "label": "Balaclava Records",
+        "condition": "Very Good",
+        "daily_rental_price": 13.00,
+        "available_copies": 3,
+        "total_copies": 3,
+        "tracks": [
+            "Yoko",
+            "Solidão de Volta",
+            "Medo",
+            "Amor-Perfeito",
+            "São Paulo",
+            "Vento na Cara"
+        ]
+    }
+]
