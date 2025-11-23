@@ -6,6 +6,14 @@ Sistema de gerenciamento de personagens e análise de sobrevivência para **Don'
 
 **Objetivo:** Criar arquitetura de microsserviços onde um serviço consome dados de outro via HTTP.
 
+---
+
+## 📑 Navegação
+
+[🏗️ Arquitetura](#️-arquitetura-da-solução) • [🔧 Tecnologias](#-tecnologias-utilizadas) • [📁 Estrutura](#-estrutura-do-projeto) • [🎮 Personagens](#-personagens-disponíveis) • [🚀 Executar](#-como-executar) • [📊 Endpoints](#-endpoints-dos-microsserviços) • [🧪 Testes](#-testando-os-microsserviços)
+
+---
+
 ## 🏗️ Arquitetura da Solução
 
 ```
@@ -56,7 +64,7 @@ desafio4/
 │   ├── characters_data.json     # Dados dos personagens
 │   ├── Dockerfile
 │   └── requirements.txt
-├── survival-stats-service/      # Microsserviço B
+├── survival-service/            # Microsserviço B
 │   ├── app.py                   # API de análise de sobrevivência
 │   ├── Dockerfile
 │   └── requirements.txt
@@ -64,7 +72,7 @@ desafio4/
 └── README.md
 ```
 
-## 🎮 Personagens Disponíveis (Inicialmente)
+## 🎮 Personagens Disponíveis
 
 | ID | Nome | Título | Health | Hunger | Sanity | Survival Odds |
 |----|------|--------|--------|--------|--------|---------------|
@@ -75,8 +83,6 @@ desafio4/
 | 5 | Wigfrid | The Performance Artist | 200 | 120 | 120 | Slim |
 | 6 | Warly | The Culinarian | 150 | 250 | 200 | Grim |
 | 7 | Wes | The Silent | 75 | 75 | 75 | None |
-
-
 
 
 ## 🚀 Como Executar
@@ -102,11 +108,33 @@ desafio4/
    docker-compose ps
    ```
 
+## 📊 Endpoints dos Microsserviços
+
+### Microsserviço A: Characters Service
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/` | Informações do serviço |
+| GET | `/characters` | Lista todos os personagens |
+| GET | `/characters/<id>` | Detalhes de um personagem |
+| GET | `/characters/odds/<level>` | Filtra por survival odds (Slim, Grim, None) |
+| POST | `/characters` | Adiciona novo personagem |
+| GET | `/health` | Health check |
+
+### Microsserviço B: Survival Stats Service
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/` | Informações do serviço |
+| GET | `/survival-stats` | Stats de todos (consome Serviço A) |
+| GET | `/survival-stats/<id>` | Análise detalhada (consome Serviço A) |
+| GET | `/server-overview` | Estatísticas agregadas do servidor |
+| GET | `/health` | Health check |
+
+
 ## 🧪 Testando os Microsserviços
 
 ### Microsserviço A: Characters Service (Port 5001)
-
-> **Nota:** Para comandos em PowerShell, consulte o arquivo `powershell-commands.txt`
 
 #### 1. Informações do serviço
 ```bash
@@ -196,7 +224,7 @@ curl -X POST http://localhost:5001/characters \
 curl http://localhost:5002/
 ```
 
-#### 2. Survival stats de todos (demonstra comunicação HTTP)
+#### 2. Survival stats de todos os personagens
 ```bash
 curl http://localhost:5002/survival-stats
 ```
@@ -263,111 +291,14 @@ curl http://localhost:5002/survival-stats/1
 curl http://localhost:5002/server-overview
 ```
 
-## 📊 Endpoints dos Microsserviços
 
-### Microsserviço A: Characters Service
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/` | Informações do serviço |
-| GET | `/characters` | Lista todos os personagens |
-| GET | `/characters/<id>` | Detalhes de um personagem |
-| GET | `/characters/odds/<level>` | Filtra por survival odds (Slim, Grim, None) |
-| POST | `/characters` | Adiciona novo personagem |
-| GET | `/health` | Health check |
-
-### Microsserviço B: Survival Stats Service
-
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| GET | `/` | Informações do serviço |
-| GET | `/survival-stats` | Stats de todos (consome Serviço A) |
-| GET | `/survival-stats/<id>` | Análise detalhada (consome Serviço A) |
-| GET | `/server-overview` | Estatísticas agregadas do servidor |
-| GET | `/health` | Health check |
-
-## 🔍 Demonstração de Comunicação HTTP
-
-### Visualizando logs da comunicação:
+## Visualizando logs da comunicação:
 
 ```bash
 # Terminal 1: Logs do Characters Service
 docker logs -f desafio4-characters-service
 
 # Terminal 2: Logs do Survival Stats Service
-docker logs -f desafio4-survival-stats-service
+docker logs -f desafio4-survival-service
 ```
-
-### Fluxo de comunicação ao chamar `/survival-stats/1`:
-
-**Terminal Survival Stats:**
-```
-[SURVIVAL-STATS] Consultando survival stats para personagem ID: 1
-[SURVIVAL-STATS] Consultando Characters Service...
-[SURVIVAL-STATS] HTTP GET → http://characters-service:5001/characters/1
-[SURVIVAL-STATS] Recebidos dados de: Wilson
-[SURVIVAL-STATS] Calculando dias sobrevividos: 157 dias
-[SURVIVAL-STATS] Survival rating: Experienced Survivor
-[SURVIVAL-STATS] Survivability score: 10.0/10
-[SURVIVAL-STATS] Avaliando riscos... Status: Stable
-[SURVIVAL-STATS] Retornando survival stats completo
-```
-
-**Terminal Characters:**
-```
-[CHARACTERS] Buscando personagem ID: 1
-[CHARACTERS] Retornando dados: Wilson - The Gentleman Scientist
-```
-
-## 🎯 Isolamento e Independência
-
-### Serviço A funciona independentemente:
-```bash
-# Para apenas o Serviço B
-docker stop desafio4-survival-stats-service
-
-# Serviço A ainda responde normalmente
-curl http://localhost:5001/characters
-```
-
-### Serviço B trata erro quando A está indisponível:
-```bash
-# Para o Serviço A
-docker stop desafio4-characters-service
-
-# Serviço B retorna erro gracioso
-curl http://localhost:5002/survival-stats
-```
-
-**Resposta esperada:**
-```json
-{
-  "error": "Characters Service indisponível",
-  "message": "Não foi possível obter dados dos personagens"
-}
-```
-
-
-## 📊 Comandos Úteis
-
-```bash
-# Iniciar
-docker-compose up -d
-
-# Ver logs de ambos
-docker-compose logs -f
-
-# Ver logs específicos
-docker logs -f desafio4-characters-service
-docker logs -f desafio4-survival-stats-service
-
-# Parar
-docker-compose down
-
-# Reconstruir
-docker-compose up -d --build
-
-# Status
-docker-compose ps
-```
-

@@ -5,18 +5,16 @@ services:
       context: ./characters-service
       dockerfile: Dockerfile
     container_name: desafio4-characters-service
-    ports:
-      - "5001:5001"
     networks:
       - desafio4-network
     restart: unless-stopped
 
   # Microsserviço B: Survival Stats Service
-  survival-stats-service:
+  survival-service:
     build:
-      context: ./survival-stats-service
+      context: ./survival-service
       dockerfile: Dockerfile
-    container_name: desafio4-survival-stats-service
+    container_name: desafio4-survival-service
     ports:
       - "5002:5002"
     environment:

@@ -157,7 +157,7 @@ def home():
 def health():
     return jsonify({
         'status': 'healthy',
-        'service': 'survival-stats-service',
+        'service': 'survival-service',
         'timestamp': datetime.now().isoformat()
     })
 
