@@ -4,7 +4,14 @@
 
 Este desafio implementa um sistema de gerenciamento de personagens de RPG usando PostgreSQL, demonstrando **persistência de dados** através de Docker Volumes. Os dados permanecem intactos mesmo após remover e recriar os containers.
 
-**Objetivo:** Demonstrar que volumes Docker armazenam dados fora do ciclo de vida dos containers.
+
+---
+
+## 📑 Navegação
+
+[🏗️ Arquitetura](#️-arquitetura-da-solução) • [🔧 Tecnologias](#-tecnologias-utilizadas) • [📁 Estrutura](#-estrutura-do-projeto) • [🚀 Como Executar](#-como-executar) • [🧪 Testes](#-testando-a-persistência)
+
+---
 
 ## 🏗️ Arquitetura da Solução
 
@@ -31,10 +38,10 @@ Este desafio implementa um sistema de gerenciamento de personagens de RPG usando
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Docker** e **Docker Compose**
-- **PostgreSQL 15-alpine**
-- **Python 3.11** com psycopg2
-- **Docker Named Volume**
+- **Docker**: Containerização, orquestração e volumes
+- **Python 3.11**: Linguagem de programação
+- **PostgreSQL 15**: Banco de dados relacional
+- **psycopg2**: Driver PostgreSQL para Python
 
 ## 📁 Estrutura do Projeto
 
@@ -73,7 +80,7 @@ desafio2/
    docker logs desafio2-rpg-app
    ```
 
-## 🧪 Demonstração de Persistência
+## 🧪 Testando a Persistência
 
 ### Cenário 1: Primeira Execução
 
@@ -150,27 +157,3 @@ docker volume ls
 # Saída: (sem desafio2-dados-rpg)
 ```
 
-## 📊 Comandos Úteis
-
-```powershell
-# Iniciar
-docker-compose up -d
-
-# Ver logs
-docker-compose logs -f
-
-# Parar (mantém volume)
-docker-compose down
-
-# Parar e remover volume
-docker-compose down -v
-
-# Executar app manualmente
-docker-compose run --rm app python app.py
-
-# Acessar PostgreSQL
-docker exec -it desafio2-postgres-db psql -U mestre -d rpg_db
-
-# Inspecionar volume
-docker volume inspect desafio2-dados-rpg
-```
