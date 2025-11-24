@@ -4,8 +4,6 @@
 
 Sistema de gerenciamento de personagens e análise de sobrevivência para **Don't Starve Together**. Demonstra comunicação HTTP entre dois microsserviços independentes.
 
-**Objetivo:** Criar arquitetura de microsserviços onde um serviço consome dados de outro via HTTP.
-
 ---
 
 ## 📑 Navegação
@@ -50,10 +48,10 @@ Sistema de gerenciamento de personagens e análise de sobrevivência para **Don'
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Docker**: Containerização dos microsserviços
-- **Flask**: Framework web para ambos os serviços
+- **Docker**: Containerização, orquestração e redes
 - **Python 3.11**: Linguagem de programação
-- **Requests**: Biblioteca para comunicação HTTP entre serviços
+- **Flask 3.0**: Framework web para API REST
+- **Requests**: Biblioteca HTTP para comunicação entre serviços
 
 ## 📁 Estrutura do Projeto
 
@@ -293,12 +291,3 @@ curl http://localhost:5002/server-overview
 
 
 
-## Visualizando logs da comunicação:
-
-```bash
-# Terminal 1: Logs do Characters Service
-docker logs -f desafio4-characters-service
-
-# Terminal 2: Logs do Survival Stats Service
-docker logs -f desafio4-survival-service
-```
