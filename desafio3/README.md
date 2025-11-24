@@ -4,7 +4,14 @@
 
 Sistema de batalha Pokémon usando as **8 Eeveelutions** (evoluções do Eevee). Demonstra orquestração de 3 serviços interdependentes: API de batalha, banco de dados PostgreSQL e cache Redis.
 
-**Objetivo:** Demonstrar comunicação e dependências entre múltiplos serviços orquestrados via Docker Compose.
+
+---
+
+## 📑 Navegação
+
+[🏗️ Arquitetura](#️-arquitetura-da-solução) • [🔧 Tecnologias](#-tecnologias-utilizadas) • [📁 Estrutura](#-estrutura-do-projeto) • [🎮 Pokémon](#-pokémon-disponíveis) • [🚀 Executar](#-como-executar) • [📊 Endpoints](#-endpoints-da-api) • [🧪 Testes](#-testando-a-comunicação-entre-serviços)
+
+---
 
 ## 🏗️ Arquitetura da Solução
 
@@ -27,11 +34,12 @@ Sistema de batalha Pokémon usando as **8 Eeveelutions** (evoluções do Eevee).
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Docker Compose**: Orquestração
-- **Flask**: API REST
-- **PostgreSQL 15**: Banco de dados
-- **Redis 7**: Cache e sessões
-- **Python 3.11**: Linguagem
+- **Docker**: Containerização, orquestração e redes
+- **Python 3.11**: Linguagem de programação
+- **Flask 3.0**: Framework web para API REST
+- **PostgreSQL 15**: Banco de dados relacional
+- **Redis 7**: Cache em memória
+- **psycopg2**: Driver PostgreSQL para Python
 
 ## 📁 Estrutura do Projeto
 
@@ -61,6 +69,29 @@ desafio3/
 | 700 | Sylveon  | Fairy    | 95  | 65     | 65     | 60         |
 
 
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+- Docker Desktop instalado e rodando
+
+### Comandos
+
+1. **Navegue até a pasta:**
+   ```powershell
+   cd desafio3
+   ```
+
+2. **Suba os 3 serviços:**
+   ```powershell
+   docker-compose up --build
+   ```
+
+3. **Verifique os containers:**
+   ```powershell
+   docker-compose ps
+   ```
+
 ## 📊 Endpoints da API
 
 | Método | Endpoint | Descrição |
@@ -87,28 +118,6 @@ curl -X POST http://localhost:5000/battle/start -H "Content-Type: application/js
 curl http://localhost:5000/history
 ```
 
-## 🚀 Como Executar
-
-### Pré-requisitos
-
-- Docker Desktop instalado e rodando
-
-### Comandos
-
-1. **Navegue até a pasta:**
-   ```powershell
-   cd desafio3
-   ```
-
-2. **Suba os 3 serviços:**
-   ```powershell
-   docker-compose up --build
-   ```
-
-3. **Verifique os containers:**
-   ```powershell
-   docker-compose ps
-   ```
 
 ## 🧪 Testando a Comunicação entre Serviços
 
@@ -211,62 +220,3 @@ curl http://localhost:5000/history
 ]
 ```
 
-
-
-## 🔍 Verificando Dependências
-
-### Ver logs de todos os serviços:
-```powershell
-docker-compose logs -f
-```
-
-### Ver logs específicos:
-```powershell
-# API
-docker logs desafio3-battle-api
-
-# PostgreSQL
-docker logs desafio3-postgres
-
-# Redis
-docker logs desafio3-redis
-```
-
-### Acessar PostgreSQL diretamente:
-```powershell
-docker exec -it desafio3-postgres psql -U trainer -d pokemon_db
-
-# Comandos SQL:
-SELECT * FROM pokemon;
-SELECT * FROM batalhas;
-\q
-```
-
-### Acessar Redis diretamente:
-```powershell
-docker exec -it desafio3-redis redis-cli
-
-# Comandos Redis:
-KEYS *
-GET pokemon:135
-GET battle:*
-```
-
-## 📊 Comandos Úteis
-
-```powershell
-# Iniciar
-docker-compose up -d
-
-# Ver status
-docker-compose ps
-
-# Ver logs
-docker-compose logs -f
-
-# Parar
-docker-compose down
-
-# Limpar tudo
-docker-compose down -v --rmi all
-```
