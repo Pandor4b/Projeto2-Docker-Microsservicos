@@ -6,6 +6,14 @@ Este projeto implementa dois containers Docker que se comunicam através de uma 
 - **Servidor Flask**: Um servidor web Python que responde requisições HTTP na porta 8080
 - **Cliente HTTP**: Um container que realiza requisições periódicas ao servidor
 
+---
+
+## 📑 Navegação
+
+[🏗️ Arquitetura](#️-arquitetura-da-solução) • [🔧 Tecnologias](#-tecnologias-utilizadas) • [📁 Estrutura](#-estrutura-do-projeto) • [🔍 Como Funciona](#-como-funciona) • [🚀 Executar](#-como-executar) • [🧪 Testes](#-testando-a-comunicação)
+
+---
+
 ## 🏗️ Arquitetura da Solução
 
 ```
@@ -32,11 +40,10 @@ Este projeto implementa dois containers Docker que se comunicam através de uma 
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Docker** e **Docker Compose**: Containerização e orquestração
+- **Docker**: Containerização, orquestração e redes
 - **Python 3.11**: Linguagem de programação
-- **Flask**: Framework web para o servidor
-- **Requests**: Biblioteca HTTP para o cliente
-- **Docker Bridge Network**: Rede customizada para comunicação
+- **Flask 3.0**: Framework web para o servidor
+- **Requests**: Biblioteca HTTP para comunicação
 
 ## 📁 Estrutura do Projeto
 
@@ -57,11 +64,6 @@ desafio1/
 ```
 
 
-## 💡 Decisões Técnicas
-
-- **Flask**: Escolhido pela facilidade de criar endpoints customizados e logging detalhado
-- **Python no Cliente**: Biblioteca `requests` oferece melhor tratamento de erros que curl/wget
-- **Rede Bridge**: Permite DNS automático entre containers (flask-server resolve para IP)
 
 ## 🔍 Como Funciona
 
@@ -143,145 +145,55 @@ services:
    - Servidor: registra cada requisição recebida
    - Cliente: exibe detalhes da resposta
 
-## 🚀 Como Executar o Projeto
+## 🚀 Como Executar
 
 ### Pré-requisitos
 
-- Docker Desktop instalado e em execução
-- Terminal PowerShell ou Command Prompt
+- Docker Desktop instalado e rodando
 
-### Passo a Passo
+### Comandos
 
-1. **Navegue até a pasta do projeto:**
+1. **Navegue até a pasta:**
    ```powershell
    cd desafio1
    ```
 
-2. **Inicie os containers com Docker Compose:**
+2. **Suba os containers:**
    ```powershell
-   docker-compose up -d --build
+   docker-compose up --build
    ```
-   
-   Este comando irá:
-   - Criar a rede `desafio1-network`
-   - Construir as imagens Docker
-   - Iniciar os containers em background (`-d`)
 
-3. **Verifique se os containers estão rodando:**
+3. **Verifique os containers:**
    ```powershell
    docker-compose ps
    ```
-   
-   Você deve ver 2 containers ativos: `desafio1-flask-server` e `desafio1-http-client`
 
-4. **Acompanhe os logs em tempo real:**
-   ```powershell
-   docker-compose logs -f
-   ```
-   
-   Pressione `Ctrl+C` para sair da visualização de logs (os containers continuarão rodando)
+## 🧪 Testando a Comunicação
 
-### 🧪 Testando a Comunicação
-
-1. **Acesse o servidor pelo navegador:**
-   - Abra: http://localhost:8080
-   - Você verá uma resposta JSON com informações do servidor
-
-2. **Teste com PowerShell/CMD:**
-   ```powershell
-   # Endpoint principal
-   curl http://localhost:8080
-   
-   # Estatísticas
-   curl http://localhost:8080/stats
-   
-   # Health check
-   curl http://localhost:8080/health
-   ```
-
-3. **Visualize os logs de cada container separadamente:**
-   ```powershell
-   # Logs do servidor
-   docker logs desafio1-flask-server
-   
-   # Logs do cliente
-   docker logs desafio1-http-client
-   ```
-
-
-
-### 🛑 Parando os Containers
+### 1. Acesse o servidor diretamente
 
 ```powershell
-docker-compose down
+curl http://localhost:8080
 ```
 
-### 🧹 Limpeza Completa
-
-Para remover containers, imagens e rede:
+### 2. Endpoint de estatísticas
 
 ```powershell
-docker-compose down --rmi all --volumes
+curl http://localhost:8080/stats
 ```
 
-## 🔍 Comandos Úteis para Verificação
+### 3. Health check
 
-### Verificar a rede Docker:
 ```powershell
-# Listar redes
-docker network ls
-
-# Inspecionar a rede do projeto
-docker network inspect desafio1-network
+curl http://localhost:8080/health
 ```
 
-### Ver logs específicos:
-```powershell
-# Logs do servidor (tempo real)
-docker logs desafio1-flask-server -f
-
-# Logs do cliente (tempo real)
-docker logs desafio1-http-client -f
-
-# Últimas 50 linhas
-docker logs desafio1-flask-server --tail 50
-```
-
-### Acessar terminal de um container:
-```powershell
-# Entrar no servidor
-docker exec -it desafio1-flask-server sh
-
-# Entrar no cliente
-docker exec -it desafio1-http-client sh
-```
-
-### Status dos containers:
-```powershell
-# Via Docker Compose
-docker-compose ps
-
-# Via Docker (mostra todos)
-docker ps -a
-```
-
----
-
-## 📋 Resumo dos Comandos Principais
+### 4. Visualizar logs dos containers
 
 ```powershell
-# Iniciar o projeto
-docker-compose up -d --build
+# Logs do servidor
+docker logs -f desafio1-flask-server
 
-# Ver logs
-docker-compose logs -f
-
-# Verificar status
-docker-compose ps
-
-# Parar containers
-docker-compose down
-
-# Limpar tudo
-docker-compose down --rmi all --volumes
+# Logs do cliente
+docker logs -f desafio1-http-client
 ```
