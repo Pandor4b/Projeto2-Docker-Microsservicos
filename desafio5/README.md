@@ -4,7 +4,10 @@
 
 Sistema de **Locadora de Discos de Vinil** implementando o padrão **API Gateway** para centralizar o acesso a dois microsserviços independentes.
 
-**Objetivo:** Demonstrar arquitetura com API Gateway como ponto único de entrada, orquestrando chamadas e agregando dados de múltiplos microsserviços.
+
+## 📑 Navegação
+
+[🏗️ Arquitetura](#️-arquitetura-da-solução) • [🔧 Tecnologias](#-tecnologias-utilizadas) • [📁 Estrutura](#-estrutura-do-projeto) • [💿 Dados do Sistema](#-dados-do-sistema) • [🚀 Executar](#-como-executar) • [📊 Endpoints](#-endpoints-do-gateway) • [🧪 Testes](#-testando-o-api-gateway)
 
 ## 🏗️ Arquitetura da Solução
 
@@ -40,10 +43,10 @@ Sistema de **Locadora de Discos de Vinil** implementando o padrão **API Gateway
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Docker & Docker Compose**: Containerização e orquestração
-- **Flask 3.0.0**: Framework web para todos os serviços
+- **Docker**: Containerização, orquestração e redes
 - **Python 3.11**: Linguagem de programação
-- **Requests 2.31.0**: Biblioteca HTTP para comunicação entre serviços
+- **Flask 3.0**: Framework web para APIs REST
+- **Requests**: Biblioteca HTTP para comunicação entre serviços
 - **API Gateway Pattern**: Padrão arquitetural de microsserviços
 
 ## 📁 Estrutura do Projeto
@@ -106,17 +109,17 @@ desafio5/
 ### Comandos
 
 1. **Navegue até a pasta:**
-   ```bash
+   ```powershell
    cd desafio5
    ```
 
 2. **Suba os containers:**
-   ```bash
+   ```powershell
    docker-compose up --build
    ```
 
 3. **Verifique os containers:**
-   ```bash
+   ```powershell
    docker-compose ps
    ```
 
@@ -128,12 +131,71 @@ desafio5-records        Up          (sem portas expostas)
 desafio5-rentals        Up          (sem portas expostas)
 ```
 
-# 🧪 Testando o API Gateway
+## 📊 Endpoints do Gateway
 
+| Método | Endpoint | Descrição |
+|--------|----------|------------|
+| GET | `/` | Informações do Gateway e lista de endpoints |
+| GET | `/records` | Listar catálogo completo de discos |
+| GET | `/records/<id>` | Detalhes de um disco específico |
+| GET | `/records/genre/<genre>` | Filtrar discos por gênero |
+| GET | `/records/<id>/availability` | Disponibilidade detalhada de um disco |
+| GET | `/customers` | Listar todos os clientes |
+| GET | `/customers/<id>/profile` | Perfil completo do cliente com estatísticas |
+| GET | `/rentals/active` | Listar aluguéis ativos |
+| POST | `/rent` | Alugar um disco |
+| PUT | `/return/<rental_id>` | Devolver um disco |
+| GET | `/recommendations/<customer_id>` | Recomendações personalizadas |
+| GET | `/health` | Health check dos serviços |
+
+### Exemplos de Uso
+
+**1. Listar Catálogo:**
+```powershell
+curl http://localhost:8080/records
+```
+
+**2. Detalhes de um Disco:**
+```powershell
+curl http://localhost:8080/records/2
+```
+
+**3. Filtrar por Gênero:**
+```powershell
+curl http://localhost:8080/records/genre/Indie
+```
+
+**4. Perfil do Cliente:**
+```powershell
+curl http://localhost:8080/customers/1/profile
+```
+
+**5. Alugar Disco:**
+```powershell
+curl -X POST http://localhost:8080/rent -H "Content-Type: application/json" -d '{"customer_id": 1, "record_id": 3, "rental_days": 7}'
+```
+
+**6. Devolver Disco:**
+```powershell
+curl -X PUT http://localhost:8080/return/1
+```
+
+**7. Recomendações:**
+```powershell
+curl http://localhost:8080/recommendations/1
+```
+
+**8. Health Check:**
+```powershell
+curl http://localhost:8080/health
+```
+
+
+## 🧪 Testando o API Gateway
 
 ### **Gateway Home**
 
-```bash
+```powershell
 curl http://localhost:8080/
 ```
 
@@ -141,233 +203,3 @@ curl http://localhost:8080/
 
 ---
 
-## 📊 Endpoints do Gateway
-
-### **1. Listar Catálogo de Discos**
-
-```bash
-curl http://localhost:8080/records
-```
-
-### **2. Detalhes de um Disco**
-
-```bash
-curl http://localhost:8080/records/2
-```
-
-**Resposta:**
-```json
-{
-  "id": 2,
-  "title": "D>E>A>T>H>M>E>T>A>L",
-  "artist": "Panchiko",
-  "genre": "Shoegaze",
-  "year": 2000,
-  "daily_rental_price": 18.00,
-  "available_copies": 1,
-  "total_copies": 2
-}
-```
-
-### **3. Filtrar por Gênero**
-
-```bash
-curl http://localhost:8080/records/genre/Indie
-```
-
-### **4. Listar Clientes**
-
-```bash
-curl http://localhost:8080/customers
-```
-
-### **5. Listar Aluguéis Ativos**
-
-```bash
-curl http://localhost:8080/rentals/active
-```
-
----
-
-
-### **6. Disponibilidade Detalhada de um Disco**
-
-```bash
-curl http://localhost:8080/records/7/availability
-```
-
-**Resposta:**
-```json
-{
-  "record": {
-    "id": 7,
-    "title": "The Rise and Fall of a Midwest Princess",
-    "artist": "Chappell Roan",
-    "genre": "Pop Alternativo",
-    "daily_price": 19.00
-  },
-  "availability": {
-    "available_copies": 0,
-    "total_copies": 2,
-    "is_available": false,
-    "currently_rented_by": ["Sophia Gallindo", "Gabriel Melo"],
-    "next_available": "2025-11-20"
-  }
-}
-```
-
-**O que o Gateway faz:**
-1. Busca informações do disco no Records Service
-2. Busca aluguéis ativos no Rentals Service
-3. Filtra quem está alugando este disco
-4. Calcula próxima disponibilidade
-5. Retorna dados agregados
-
----
-
-### **7. Perfil Completo do Cliente**
-
-```bash
-curl http://localhost:8080/customers/1/profile
-```
-
-**Resposta:**
-```json
-{
-  "customer": {
-    "id": 1,
-    "name": "Paulo Rosado",
-    "membership_tier": "Gold",
-    "active_rentals": 1,
-    "favorite_genre": "Musical"
-  },
-  "active_rentals": [
-    {
-      "record_title": "Meteora (Bonus Edition)",
-      "due_date": "2025-11-11",
-      "total_cost": 170.00
-    }
-  ],
-  "statistics": {
-    "total_rentals": 47,
-    "total_spent": 4830.00,
-    "favorite_genre": "Musical"
-  }
-}
-```
-
----
-
-### **8. Alugar Disco**
-
-```bash
-curl -X POST http://localhost:8080/rent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "customer_id": 1,
-    "record_id": 3,
-    "rental_days": 7
-  }'
-```
-
-**Resposta:**
-```json
-{
-  "message": "Aluguel realizado com sucesso",
-  "rental": {
-    "id": 6,
-    "customer_name": "Paulo Rosado",
-    "record_title": "Petals For Armor",
-    "rental_days": 7,
-    "total_cost": 140.00,
-    "due_date": "2025-11-26"
-  },
-  "orchestrated_by": "gateway"
-}
-```
-
----
-
-### **9. Devolver Disco**
-
-```bash
-curl -X PUT http://localhost:8080/return/1
-```
-
-
-
-### **10. Recomendações Personalizadas**
-
-```bash
-curl http://localhost:8080/recommendations/1
-```
-
-**Resposta:**
-```json
-{
-  "customer": {
-    "id": 1,
-    "name": "Paulo Rosado",
-    "favorite_genre": "Musical"
-  },
-  "recommendations": [
-    {
-      "title": "Hamilton (Original Broadway Cast Recording)",
-      "artist": "Original Broadway Cast of Hamilton",
-      "available_copies": 1
-    }
-  ],
-  "generated_by": "gateway"
-}
-```
-
-
----
-
-
-## 📊 Health Check dos Serviços
-
-```bash
-curl http://localhost:8080/health
-```
-
-**Resposta:**
-```json
-{
-  "status": "healthy",
-  "gateway": "healthy",
-  "services": {
-    "records_service": "healthy",
-    "rentals_service": "healthy"
-  },
-  "timestamp": "2025-11-19T10:30:00"
-}
-```
-
----
-
-## 🔧 Comandos Úteis
-
-```bash
-# Iniciar sistema
-docker-compose up --build
-
-# Logs de todos os serviços
-docker-compose logs -f
-
-# Logs específicos
-docker logs -f desafio5-gateway
-docker logs -f desafio5-records
-docker logs -f desafio5-rentals
-
-# Parar sistema
-docker-compose down
-
-# Reconstruir
-docker-compose up --build --force-recreate
-
-# Status dos containers
-docker-compose ps
-```
-
----
