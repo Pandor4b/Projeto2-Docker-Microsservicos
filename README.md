@@ -10,7 +10,7 @@ Este repositório contém **5 desafios** sobre Docker e Microsserviços, cada um
 
 ---
 
-## 🎯 Desafios Implementados
+## 🎯 Desafios
 
 ### [Desafio 1 — Containers em Rede](./desafio1/)
 **Conceito:** Comunicação entre containers em rede customizada  
@@ -19,7 +19,7 @@ Este repositório contém **5 desafios** sobre Docker e Microsserviços, cada um
 Dois containers se comunicam através de uma rede Docker customizada. Um servidor Flask responde requisições de um cliente que faz chamadas periódicas a cada 5 segundos.
 
 
-[🔗 Ver documentação completa →](./desafio1/README.md)
+[Ver documentação completa →](./desafio1/README.md)
 
 ---
 
@@ -30,7 +30,7 @@ Dois containers se comunicam através de uma rede Docker customizada. Um servido
 Implementa um banco de dados PostgreSQL com persistência de dados usando volumes. Os dados sobrevivem mesmo após remover e recriar containers, permitindo operações CRUD em personagens de RPG.
 
 
-[🔗 Ver documentação completa →](./desafio2/README.md)
+[Ver documentação completa →](./desafio2/README.md)
 
 ---
 
@@ -41,7 +41,7 @@ Implementa um banco de dados PostgreSQL com persistência de dados usando volume
 Sistema com 3 serviços integrados: API de batalha Flask, banco PostgreSQL para dados dos Pokémon e Redis para cache de batalhas. Demonstra orquestração completa com dependências entre serviços.
 
 
-[🔗 Ver documentação completa →](./desafio3/README.md)
+[Ver documentação completa →](./desafio3/README.md)
 
 ---
 
@@ -51,7 +51,7 @@ Sistema com 3 serviços integrados: API de batalha Flask, banco PostgreSQL para 
 
 Dois microsserviços independentes que se comunicam via HTTP. O Characters Service gerencia personagens e o Survival Stats Service consome esses dados para calcular estatísticas de sobrevivência.
 
-[🔗 Ver documentação completa →](./desafio4/README.md)
+[Ver documentação completa →](./desafio4/README.md)
 
 ---
 
@@ -61,20 +61,18 @@ Dois microsserviços independentes que se comunicam via HTTP. O Characters Servi
 
 Implementa o padrão API Gateway com 3 serviços: Gateway (ponto único de entrada), Records Service (catálogo de vinis) e Rentals Service (gestão de aluguéis). Gateway orquestra chamadas e agrega dados de múltiplos serviços.
 
-[🔗 Ver documentação completa →](./desafio5/README.md)
+[Ver documentação completa →](./desafio5/README.md)
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Docker** - Containerização de aplicações
-- **Docker Compose** - Orquestração de múltiplos containers
-- **Python 3.11** - Linguagem principal
-- **Flask 3.0** - Framework web para APIs REST
-- **PostgreSQL** - Banco de dados relacional
-- **Redis** - Cache em memória
-- **Docker Networks** - Comunicação entre containers
-- **Docker Volumes** - Persistência de dados
+- **Docker**: Containerização, orquestração, redes e volumes
+- **Python 3.11**: Linguagem de programação
+- **Flask 3.0**: Framework web para APIs REST
+- **PostgreSQL 15**: Banco de dados relacional
+- **Redis 7**: Cache em memória
+- **Requests**: Biblioteca HTTP para comunicação entre serviços
 
 ---
 
